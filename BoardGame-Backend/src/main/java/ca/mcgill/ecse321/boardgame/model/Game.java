@@ -21,6 +21,9 @@ public class Game implements Serializable {
     }
 
     public Game(String title, String description, String category) {
+        if (title == null || title.isEmpty()) {
+            throw new IllegalArgumentException("Title cannot be null or empty");
+        }
         this.title = title;
         this.description = description;
         this.category = category;
@@ -42,4 +45,30 @@ public class Game implements Serializable {
         this.description = description;
     }
 
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Game{" +
+                "title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", category='" + category + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Game game = (Game) o;
+        return Objects.equals(title, game.title);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title);
+    }
 }
